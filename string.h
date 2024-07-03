@@ -15,7 +15,7 @@ typedef struct {
 
 String as_string(char*);
 
-String from_wstr(wchar_t* wstr, Allocator allocator);
+String from_wstr(const wchar_t* wstr, Allocator allocator);
 
 
 #ifdef SANE_STD_STRING_IMPLEMENTATION
@@ -31,7 +31,7 @@ String as_string(char* cstr) {
     };
 }
 
-String from_wstr(wchar_t* wstr, Allocator allocator) {
+String from_wstr(const wchar_t* wstr, Allocator allocator) {
     size_t mbs_length = 2 * (wcslen(wstr) + 1);
     char* data = allocator.allocate(mbs_length);
     size_t length = wcstombs(data, wstr, mbs_length);

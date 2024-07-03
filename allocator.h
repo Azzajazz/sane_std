@@ -5,6 +5,7 @@
 
 typedef struct {
     void* (*allocate)(size_t);
+    void  (*free)(void*);
 } Allocator;
 
 Allocator make_standard_allocator(void);
@@ -16,7 +17,7 @@ Allocator make_standard_allocator(void);
 #include <stdlib.h>
 
 Allocator make_standard_allocator() {
-    return (Allocator){malloc};
+    return (Allocator){malloc, free};
 }
 
 #endif // SANE_STD_ALLOCATOR_IMPLEMENTATION 
